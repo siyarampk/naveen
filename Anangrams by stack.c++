@@ -3,31 +3,30 @@
  
 using namespace std;
  
-string in, out;
+string s, p;
  
-void dfs(string a, string b, string stack, string path, int n) 
+void anagram(string a, string b, string c, string d, int n)
 {
-    if(n == in.length() * 2) 
+    if(n == s.length() * 2) 
     {
-        if(b == out)
-            cout << path << endl;
+        if(b == p)
+            cout << d << endl;
         return;
     }
  
-    
     if(a.length() > 0)
-        dfs(a.substr(1, a.length() - 1), b, stack + a[0], path + (n == 0? "i" : " i"), n + 1);
-    if(stack.length() > 0 && stack[stack.length() - 1] == out[b.length()])
-        dfs(a, b + stack[stack.length() - 1],   stack.substr(0, stack.length() - 1),  path + " o", n + 1);
+        anagram(a.substr(1, a.length() - 1), b, c + a[0], d + (n == 0? "i" : " i"), n + 1);
+    if(c.length() > 0 && c[c.length() - 1] == p[b.length()])
+        anagram(a, b + c[c.length() - 1], c.substr(0, c.length() - 1), d + " o", n + 1);
 }
  
 int main() 
 {
-    while(cin >> in >> out) 
+    while(cin >> s >> p) 
     {
         printf("[\n");
-        if(in.length() == out.length())
-            dfs(in, "", "", "", 0);
+        if(s.length() == p.length())
+            anagram(s, "", "", "", 0);
         printf("]\n");
     }
 }
